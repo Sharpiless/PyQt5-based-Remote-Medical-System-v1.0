@@ -6,7 +6,7 @@
             <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1000</width>
+                <width>1100</width>
                 <height>900</height>
             </rect>
         </property>
@@ -122,7 +122,7 @@
                                                     </font>
                                                 </property>
                                                 <property name="text">
-                                                    <string>端口号1: </string>
+                                                    <string>端口号: </string>
                                                 </property>
                                             </widget>
                                         </item>
@@ -142,9 +142,36 @@
                                                         </property>
                                                     </widget>
                                                 </item>
+                                                <item>
+                                                    <widget class="QPushButton" name="close_net1">
+                                                        <property name="text">
+                                                            <string>关闭连接</string>
+                                                        </property>
+                                                    </widget>
+                                                </item>
                                             </layout>
                                         </item>
                                         <item row="2" column="0">
+                                            <widget class="QLabel" name="target_ip_btn_1">
+                                                <property name="font">
+                                                    <font>
+                                                        <weight>75</weight>
+                                                        <bold>true</bold>
+                                                    </font>
+                                                </property>
+                                                <property name="text">
+                                                    <string>目标IP:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="2" column="1">
+                                            <widget class="QLineEdit" name="target_ip_1">
+                                                <property name="text">
+                                                    <string>待输入</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="3" column="0">
                                             <widget class="QLabel" name="address_label2">
                                                 <property name="font">
                                                     <font>
@@ -153,11 +180,11 @@
                                                     </font>
                                                 </property>
                                                 <property name="text">
-                                                    <string>端口号2: </string>
+                                                    <string>端口号: </string>
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="2" column="1">
+                                        <item row="3" column="1">
                                             <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,0">
                                                 <item>
                                                     <widget class="QLineEdit" name="address2">
@@ -173,9 +200,36 @@
                                                         </property>
                                                     </widget>
                                                 </item>
+                                                <item>
+                                                    <widget class="QPushButton" name="close_net2">
+                                                        <property name="text">
+                                                            <string>关闭连接</string>
+                                                        </property>
+                                                    </widget>
+                                                </item>
                                             </layout>
                                         </item>
-                                        <item row="3" column="0">
+                                        <item row="4" column="0">
+                                            <widget class="QLabel" name="target_ip_btn_2">
+                                                <property name="font">
+                                                    <font>
+                                                        <weight>75</weight>
+                                                        <bold>true</bold>
+                                                    </font>
+                                                </property>
+                                                <property name="text">
+                                                    <string>目标IP:</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="4" column="1">
+                                            <widget class="QLineEdit" name="target_ip_2">
+                                                <property name="text">
+                                                    <string>待输入</string>
+                                                </property>
+                                            </widget>
+                                        </item>
+                                        <item row="5" column="0">
                                             <widget class="QLabel" name="address_label3">
                                                 <property name="font">
                                                     <font>
@@ -184,11 +238,11 @@
                                                     </font>
                                                 </property>
                                                 <property name="text">
-                                                    <string>端口号3: </string>
+                                                    <string>端口号: </string>
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="3" column="1">
+                                        <item row="5" column="1">
                                             <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,0">
                                                 <item>
                                                     <widget class="QLineEdit" name="address3">
@@ -204,10 +258,17 @@
                                                         </property>
                                                     </widget>
                                                 </item>
+                                                <item>
+                                                    <widget class="QPushButton" name="close_net3">
+                                                        <property name="text">
+                                                            <string>关闭连接</string>
+                                                        </property>
+                                                    </widget>
+                                                </item>
                                             </layout>
                                         </item>
-                                        <item row="4" column="0">
-                                            <widget class="QLabel" name="max_speed_label">
+                                        <item row="6" column="0">
+                                            <widget class="QLabel" name="target_ip_btn_3">
                                                 <property name="font">
                                                     <font>
                                                         <weight>75</weight>
@@ -219,8 +280,8 @@
                                                 </property>
                                             </widget>
                                         </item>
-                                        <item row="4" column="1">
-                                            <widget class="QLineEdit" name="target_ip">
+                                        <item row="6" column="1">
+                                            <widget class="QLineEdit" name="target_ip_3">
                                                 <property name="text">
                                                     <string>待输入</string>
                                                 </property>

@@ -4,7 +4,7 @@ import sys
 from UILib.MainWindow import MainWindow
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
 import qdarkstyle
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 from UILib.Database import KEYS
 from PyQt5.QtGui import QImage, QPixmap
 
@@ -58,6 +58,9 @@ class MainSeverUI(MainWindow):
         self.face_pt = None
         self.sever_num = 0
         self.my_thread = [None, None, None]
+
+    def warning_box(self, title, message):
+        QMessageBox.about(self, title, message)
 
     def update_values_1(self, values):
         try:
@@ -130,25 +133,30 @@ class MainSeverUI(MainWindow):
 
     def start_tcp_server(self):
         # 实例化一个socket
-        ipText = self.myip
         if self.sever_num == 0:
-            if self.address1.text() == '待输入':
+            if self.address1.text() == '待输入' or self.target_ip_1.text() == '待输入':
                 print('【错误】请输入正确的IP地址和端口号')
+                self.warning_box('【错误】', '请输入正确的IP地址和端口号')
                 return
             else:
                 portValue = int(self.address1.text())
+                ipText = self.target_ip_1.text()
         elif self.sever_num == 1:
-            if self.address2.text() == '待输入':
+            if self.address2.text() == '待输入' or self.target_ip_2.text() == '待输入':
                 print('【错误】请输入正确的IP地址和端口号')
+                self.warning_box('【错误】', '请输入正确的IP地址和端口号')
                 return
             else:
                 portValue = int(self.address2.text())
+                ipText = self.target_ip_2.text()
         else:
-            if self.address2.text() == '待输入':
+            if self.address3.text() == '待输入' or self.target_ip_3.text() == '待输入':
                 print('【错误】请输入正确的IP地址和端口号')
+                self.warning_box('【错误】', '请输入正确的IP地址和端口号')
                 return
             else:
-                portValue = int(self.address2.text())
+                portValue = int(self.address3.text())
+                ipText = self.target_ip_3.text()
 
         self.my_thread[self.sever_num] = mythread(ipText, portValue)  # 主线程连接子线
         if self.sever_num == 0:

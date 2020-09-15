@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
 
         self.initMenu()
         self.initParams()
-        self.connect_net1.clicked.connect(self.start_tcp_server)
+        self.connect_net.clicked.connect(self.start_tcp_server)
 
         self.feed = None
         self.vs = None
@@ -62,9 +62,7 @@ class MainWindow(QMainWindow):
         self.timer.start(50)
 
     def initParams(self):
-
-        self.target_ip.setReadOnly(True)
-
+        self.cam_id.setReadOnly(True)
         ret, self.myip = click_get_ip()
         if ret:
             self.cam_id.setText(str(self.myip))
@@ -119,8 +117,12 @@ class MainWindow(QMainWindow):
 
         face = packet['faces']
         if not face is None:
+            if self.video is None:
+                name = '梁瑛平'
+            else:
+                name = '彭于晏'
             print('【检测成功】')
-            value = {KEYS.CARID: '梁瑛平',
+            value = {KEYS.CARID: name,
                      KEYS.CARIMAGE: QPixmap.fromImage(self.toQImage(face)),
                      KEYS.CARCOLOR: '男',
                      KEYS.LICENSEIMAGE: None,

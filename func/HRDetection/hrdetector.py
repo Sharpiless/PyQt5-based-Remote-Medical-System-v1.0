@@ -40,6 +40,7 @@ class HeartRateDetector(object):
         # Detect face using dlib
         faces = self.detector(frame, 0)
         face_roi = None
+        
         if len(faces):
             face_points = self.predictor(frame, faces[0])
             p = faces[0]

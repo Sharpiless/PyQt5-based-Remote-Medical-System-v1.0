@@ -5,7 +5,7 @@ import cv2
 
 from UILib.SonWindow import MainWindow
 from PyQt5.QtCore import QTimer, QThread, pyqtSignal
-from PyQt5.QtWidgets import QSizePolicy
+from PyQt5.QtWidgets import QSizePolicy, QMessageBox
 from processor.MainProcessor import MainProcessor
 
 
@@ -20,10 +20,6 @@ class MainSocketUI(MainWindow):
         self.resize(450, 600)
         self.p = None
 
-        if self.myip is None:
-            self.target_ip.setText('异常，无法获取本机IP')
-        else:
-            self.target_ip.setText(str(self.myip))
         self.vs = cv2.VideoCapture(0)
         self.video = None
         ret, _ = self.vs.read()
@@ -31,27 +27,30 @@ class MainSocketUI(MainWindow):
             print('【进程错误】摄像头被占用，启用默认视频')
             self.vs = cv2.VideoCapture('data/peng.mp4')
             self.video = 'data/peng.mp4'
-        self.address1.setText('待输入')
-        self.close_extra_btn()
+        self.address.setText('待输入')
 
-    def close_extra_btn(self):
-
-        pass
+    def warning_box(self, title, message):
+        QMessageBox.about(self, title, message)
 
     def start_tcp_server(self):
         # 实例化一个socket
-        ipText = self.myip
-        if self.address1.text() == '待输入':
+        if self.address.text() == '待输入' or self.target_ip.text() == '待输入':
             print('【错误】请输入正确的IP地址和端口号')
             return
         else:
-            portValue = int(self.address1.text())
+            portValue = int(self.address.text())
+            ipText = self.target_ip.text()
 
         self.p = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.p.connect((ipText, portValue))
-        print('【连接成功】{}\n目标IP：{}\n端口号：{}'.format(
-            ctime(), ipText, portValue))
-        self.processor = MainProcessor(None, False, p=self.p)
+        try:
+            self.p.connect((ipText, portValue))
+        except Exception as e:
+            print('【连接错误】端口被占用或者未启动')
+            self.warning_box('【连接错误】', '端口被占用或者未启动')
+        else:
+            print('【连接成功】{}\n目标IP：{}\n端口号：{}'.format(
+                ctime(), ipText, portValue))
+            self.processor = MainProcessor(None, False, p=self.p)
 
 def main():
     '''

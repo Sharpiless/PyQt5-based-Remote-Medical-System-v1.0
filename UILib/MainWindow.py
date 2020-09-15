@@ -39,7 +39,6 @@ class MainWindow(QMainWindow):
         self.myip = None
         self.face_id = None
 
-        # self.map_button.clicked.connect(self.new_windows)
         cam_groups = ['TCP服务端']
 
         self.camera_group.clear()
@@ -76,8 +75,6 @@ class MainWindow(QMainWindow):
         self.updateCamInfo(None)
 
     def initParams(self):
-
-        self.target_ip.setReadOnly(True)
 
         ret, self.myip = click_get_ip()
         if ret:
@@ -142,7 +139,7 @@ class MainWindow(QMainWindow):
         p.showGrid(x=True, y=True)
         p.setLabel(axis="left", text="Amplitude / V")
         p.setLabel(axis="bottom", text="t / s")
-        p.setTitle("Heart Rate")
+        p.setTitle("心率")
         p.addLegend()
         self.curve11 = p.plot(pen="g", name="y1")
         self.curve12 = p.plot(pen="r", name="y2")
@@ -154,7 +151,7 @@ class MainWindow(QMainWindow):
         p.showGrid(x=True, y=True)
         p.setLabel(axis="left", text="Amplitude / V")
         p.setLabel(axis="bottom", text="t / s")
-        p.setTitle("Heart Rate")
+        p.setTitle("心率")
         p.addLegend()
         self.curve21 = p.plot(pen="g", name="y1")
         self.curve22 = p.plot(pen="r", name="y2")
@@ -166,7 +163,7 @@ class MainWindow(QMainWindow):
         p.showGrid(x=True, y=True)
         p.setLabel(axis="left", text="Amplitude / V")
         p.setLabel(axis="bottom", text="t / s")
-        p.setTitle("Heart Rate")
+        p.setTitle("心率")
         p.addLegend()
         self.curve31 = p.plot(pen="g", name="y1")
         self.curve32 = p.plot(pen="r", name="y2")
