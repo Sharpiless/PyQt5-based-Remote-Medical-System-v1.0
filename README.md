@@ -10,6 +10,12 @@
 
 # 使用方法
 
+## 0. 下载人脸关键点检测权重文件：
+
+http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+
+下载后解压到data文件夹下。
+
 ## 1. 启动服务器：
 
 ```
@@ -32,7 +38,7 @@ python TCPSocket.py
 
 # 联系作者：
 
-QQ：1691608003
+QQ：1691608003 
 微信：Sharpiless
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200915101604555.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDkzNjg4OQ==,size_16,color_FFFFFF,t_70#pic_center)
