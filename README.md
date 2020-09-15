@@ -10,13 +10,13 @@
 
 # 使用方法
 
-## 0. 下载人脸关键点检测权重文件：
+## 1. 下载人脸关键点检测权重文件：
 
 http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 
 下载后解压到data文件夹下。
 
-## 1. 启动服务器：
+## 2. 启动服务器：
 
 ```
 python TCPSever.py
@@ -26,7 +26,7 @@ python TCPSever.py
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200915101802432.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDkzNjg4OQ==,size_16,color_FFFFFF,t_70#pic_center)
 
-## 2. 启动终端：
+## 3. 启动终端：
 （可以启动多个终端）
 
 ```
