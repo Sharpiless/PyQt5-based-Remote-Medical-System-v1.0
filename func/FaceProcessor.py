@@ -13,16 +13,13 @@ im = None
 result = None
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(
-    './data/shape_predictor_68_face_landmarks.dat')
-
 
 class FaceTracker(object):
 
     def __init__(self):
 
-        self.sleep_detector = SleepDetector(detector, predictor)
-        self.hr_detector = HeartRateDetector(detector, predictor)
+        self.sleep_detector = SleepDetector()
+        self.hr_detector = HeartRateDetector(detector)
 
         self.fps = 0
 

@@ -16,10 +16,9 @@ class HeartRateDetector(object):
     心率检测模块
     '''
 
-    def __init__(self, detect, predictor):
+    def __init__(self, detect):
 
         self.detector = detect
-        self.predictor = predictor
         self.roi_avg_values = []
         self.graph_values = []
         self.times = []
@@ -42,13 +41,12 @@ class HeartRateDetector(object):
         face_roi = None
         
         if len(faces):
-            face_points = self.predictor(frame, faces[0])
             p = faces[0]
             x1, y1 = p.left(), p.top()
             x2, y2 = p.right(), p.bottom()
             cv2.rectangle(frame, (x1, y1), (x2,
                                             y2), color=(0, 255, 0), thickness=2)
-            roi_avg = get_roi_avg(frame, view, face_points, draw_rect=False)
+            roi_avg = random()
             self.roi_avg_values.append(roi_avg)
             self.times.append(time.time())
 
