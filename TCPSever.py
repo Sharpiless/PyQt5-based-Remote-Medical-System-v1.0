@@ -62,75 +62,12 @@ class MainSeverUI(MainWindow):
     def warning_box(self, title, message):
         QMessageBox.about(self, title, message)
 
-    def update_values_1(self, values):
-        try:
-            if len(values):
-                values = values.split(',')
-                self.graph_values[0].append(eval(values[0]))
-                self.eye_values[0].append(eval(values[1]))
-                if values[2] == '0':
-                    self.face_pt = None
-                else:
-                    self.face_pt = values[2]
-                    self.updateSeverLog(self.face_pt)
-            if len(self.graph_values[0]) > self.values_max_num:
-                self.graph_values[0].pop(0)
-            if len(self.eye_values[0]) > self.values_max_num:
-                self.eye_values[0].pop(0)
-        except Exception as e:
-            print(e)
-            self.my_thread[0].quit()
-
-    def update_values_2(self, values):
-        try:
-            if len(values):
-                values = values.split(',')
-                self.graph_values[1].append(eval(values[0]))
-                self.eye_values[1].append(eval(values[1]))
-                if values[2] == '0':
-                    self.face_pt = None
-                else:
-                    self.face_pt = values[2]
-                    self.updateSeverLog(self.face_pt)
-            if len(self.graph_values[1]) > self.values_max_num:
-                self.graph_values[1].pop(0)
-            if len(self.eye_values[1]) > self.values_max_num:
-                self.eye_values[1].pop(0)
-        except Exception as e:
-            print(e)
-            self.my_thread[1].quit()
-
-    def update_values_3(self, values):
-        try:
-            if len(values):
-                values = values.split(',')
-                self.graph_values[2].append(eval(values[0]))
-                self.eye_values[2].append(eval(values[1]))
-                if values[2] == '0':
-                    self.face_pt = None
-                else:
-                    self.face_pt = values[2]
-                    self.updateSeverLog(self.face_pt)
-            if len(self.graph_values[2]) > self.values_max_num:
-                self.graph_values[2].pop(0)
-            if len(self.eye_values[2]) > self.values_max_num:
-                self.eye_values[2].pop(0)
-        except Exception as e:
-            print(e)
-            self.my_thread[2].quit()
-
-    def updateSeverLog(self, face_pt):
-        print('【检测成功】')
-        value = {KEYS.CARID: '梁瑛平',
-                 KEYS.CARIMAGE: QPixmap(face_pt),
-                 KEYS.CARCOLOR: '男',
-                 KEYS.LICENSEIMAGE: None,
-                 KEYS.LICENSENUMBER: '1120182525',
-                 KEYS.LOCATION: str(self.camera_group.currentText()),
-                 KEYS.RULENAME: '待输入',
-                 KEYS.RULEID: '待输入'}
-        self.updateLog(value)
-
+    def close_tcp_server(self, index=0):
+        print('【当前线程是否开启】', self.my_thread[index] is None)
+        if not self.my_thread[index] is None:
+            self.my_thread[index].quit()
+            print('【关闭线程】成功关闭线程', index+1)
+ 
     def start_tcp_server(self):
         # 实例化一个socket
         if self.sever_num == 0:

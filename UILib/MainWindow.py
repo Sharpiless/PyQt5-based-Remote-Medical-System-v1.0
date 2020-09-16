@@ -60,9 +60,14 @@ class MainWindow(QMainWindow):
 
         self.initMenu()
         self.initParams()
+
         self.connect_net1.clicked.connect(self.start_tcp_server)
         self.connect_net2.clicked.connect(self.start_tcp_server)
         self.connect_net3.clicked.connect(self.start_tcp_server)
+
+        self.close_net1.clicked.connect(lambda: self.close_tcp_server(index=1))
+        self.close_net2.clicked.connect(lambda: self.close_tcp_server(index=2))
+        self.close_net3.clicked.connect(lambda: self.close_tcp_server(index=3))
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.plotData)
@@ -108,7 +113,6 @@ class MainWindow(QMainWindow):
         act = QAction('&退出', self)
         act.setStatusTip('退出应用')
         act.triggered.connect(self.close_all)
-        act.triggered.connect(self.tcp_close)
         act.triggered.connect(qApp.quit)
         fileMenu.addAction(act)
 
@@ -186,8 +190,77 @@ class MainWindow(QMainWindow):
             self.curve32.setData(np.arange(len(self.eye_values[2])),
                                 np.array(self.eye_values[2]))
 
+    def update_values_1(self, values):
+        try:
+            if len(values):
+                values = values.split(',')
+                self.graph_values[0].append(eval(values[0]))
+                self.eye_values[0].append(eval(values[1]))
+                if values[2] == '0':
+                    self.face_pt = None
+                else:
+                    self.face_pt = values[2]
+                    self.updateSeverLog(self.face_pt)
+            if len(self.graph_values[0]) > self.values_max_num:
+                self.graph_values[0].pop(0)
+            if len(self.eye_values[0]) > self.values_max_num:
+                self.eye_values[0].pop(0)
+        except Exception as e:
+            print(e)
+            self.my_thread[0].quit()
+
+    def update_values_2(self, values):
+        try:
+            if len(values):
+                values = values.split(',')
+                self.graph_values[1].append(eval(values[0]))
+                self.eye_values[1].append(eval(values[1]))
+                if values[2] == '0':
+                    self.face_pt = None
+                else:
+                    self.face_pt = values[2]
+                    self.updateSeverLog(self.face_pt)
+            if len(self.graph_values[1]) > self.values_max_num:
+                self.graph_values[1].pop(0)
+            if len(self.eye_values[1]) > self.values_max_num:
+                self.eye_values[1].pop(0)
+        except Exception as e:
+            print(e)
+            self.my_thread[1].quit()
+
+    def update_values_3(self, values):
+        try:
+            if len(values):
+                values = values.split(',')
+                self.graph_values[2].append(eval(values[0]))
+                self.eye_values[2].append(eval(values[1]))
+                if values[2] == '0':
+                    self.face_pt = None
+                else:
+                    self.face_pt = values[2]
+                    self.updateSeverLog(self.face_pt)
+            if len(self.graph_values[2]) > self.values_max_num:
+                self.graph_values[2].pop(0)
+            if len(self.eye_values[2]) > self.values_max_num:
+                self.eye_values[2].pop(0)
+        except Exception as e:
+            print(e)
+            self.my_thread[2].quit()
+
+    def updateSeverLog(self, face_pt):
+        print('【检测成功】')
+        value = {KEYS.CARID: '梁瑛平',
+                 KEYS.CARIMAGE: QPixmap(face_pt),
+                 KEYS.CARCOLOR: '男',
+                 KEYS.LICENSEIMAGE: None,
+                 KEYS.LICENSENUMBER: '1120182525',
+                 KEYS.LOCATION: str(self.camera_group.currentText()),
+                 KEYS.RULENAME: '待输入',
+                 KEYS.RULEID: '待输入'}
+        self.updateLog(value)
+
     def start_tcp_server(self):
         return
 
-    def tcp_close(self):
+    def close_tcp_server(self):
         return
