@@ -65,9 +65,9 @@ class MainWindow(QMainWindow):
         self.connect_net2.clicked.connect(self.start_tcp_server)
         self.connect_net3.clicked.connect(self.start_tcp_server)
 
-        self.close_net1.clicked.connect(lambda: self.close_tcp_server(index=1))
-        self.close_net2.clicked.connect(lambda: self.close_tcp_server(index=2))
-        self.close_net3.clicked.connect(lambda: self.close_tcp_server(index=3))
+        self.close_net1.clicked.connect(lambda: self.close_tcp_server(index=0))
+        self.close_net2.clicked.connect(lambda: self.close_tcp_server(index=1))
+        self.close_net3.clicked.connect(lambda: self.close_tcp_server(index=2))
 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.plotData)

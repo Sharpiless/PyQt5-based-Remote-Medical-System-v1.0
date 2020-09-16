@@ -54,5 +54,9 @@ class MainProcessor(object):
             msg = '0,0,{}'.format(pt)
         if not self.p is None:
             print('【发送消息】', msg)
-            self.p.send(msg.encode('utf-8'))
+            try:
+                self.p.send(msg.encode('utf-8'))
+            except ConnectionResetError as e:
+                print('【连接错误】远程主机强迫关闭了一个现有的连接')
+                self.p.shutdown(2)
         return dicti

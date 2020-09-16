@@ -17,6 +17,11 @@ class mythread(QThread):  # 步骤1.创建一个线程实例
         self.ipText = ipText
         self.portValue = portValue
 
+    def close_thread(self):
+        self.ser.close()
+        # self.ser.shutdown(0)
+        self.quit()
+
     def run(self):
         # 套接字类型AF_INET, socket.SOCK_STREAM   tcp协议，基于流式的协议
         self.ser = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -63,9 +68,9 @@ class MainSeverUI(MainWindow):
         QMessageBox.about(self, title, message)
 
     def close_tcp_server(self, index=0):
-        print('【当前线程是否开启】', self.my_thread[index] is None)
+        print('【当前线程是否开启】', not self.my_thread[index] is None)
         if not self.my_thread[index] is None:
-            self.my_thread[index].quit()
+            self.my_thread[index].close_thread()
             print('【关闭线程】成功关闭线程', index+1)
  
     def start_tcp_server(self):
@@ -96,6 +101,7 @@ class MainSeverUI(MainWindow):
                 ipText = self.target_ip_3.text()
 
         self.my_thread[self.sever_num] = mythread(ipText, portValue)  # 主线程连接子线
+        print('【当前线程是否开启】', not self.my_thread[self.sever_num] is None)
         if self.sever_num == 0:
             self.my_thread[self.sever_num].mysignal.connect(
                 self.update_values_1)  # 自定义信号连接
